@@ -7,7 +7,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Vertical Form</h4>
+                        <h4 class="card-title">Create</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -70,7 +70,7 @@
                                                                     <div class="col-12">
                                                                         <fieldset class="form-group">
                                                                             <input type="text" class="form-control mb-1 d-none"  name="language_code_{{$language->code}}"  value="{{$language->code}}">
-                                                                            <textarea class="form-control" id="basicTextarea" rows="3" placeholder="Translations" name="translation_{{$language->code}}"></textarea>
+                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translation_{{$language->code}}"></textarea>
                                                                         </fieldset>
                                                                     </div>
                                                                    </div>
