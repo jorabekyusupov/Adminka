@@ -65,15 +65,12 @@
                                                 <!-- Tab panes -->
                                                 <div class="tab-content pt-1">
                                                     @if(isset($languages))
-                                                        @foreach($languages as $language)
+                                                        @foreach($languages as $key=>$language)
                                                                 <div class="tab-pane {{$language->code === 'eng' ? 'active' : ''}}" id="{{$language->code}}-id" role="tabpanel" aria-labelledby="{{$language->code}}">
                                                                     <div class="col-12">
-                                                                        <fieldset class="form-group">
-                                                                            <form name="translations[]">
-
-                                                                            <input type="text" class="form-control mb-1 d-none"  name="translations.*.language_code"  value="{{$language->code}}">
-                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations.*.translation"></textarea>
-                                                                            </form>
+                                                                        <fieldset class="form-group" >
+                                                                            <input type="text" class="form-control mb-1 d-none"  name="translations[{{$key}}][language_code]"  value="{{$language->code}}">
+                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations[{{$key}}][translation]"></textarea>
                                                                         </fieldset>
                                                                     </div>
                                                                    </div>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Phrase\PhraseStoreRequest;
+use App\Http\Requests\Phrase\PhraseStoreUpdateRequest;
+use App\Http\Requests\Phrase\PhraseTranslationRequest;
 use App\Http\Requests\Phrase\PhraseUpdateRequest;
 use App\Services\Language\LanguageService;
 use App\Services\Page\PageService;
 use App\Services\Phrase\PhraseService;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 
 class PhraseController extends Controller
@@ -25,8 +27,9 @@ class PhraseController extends Controller
 
     public function index()
     {
+        $phrasesTranslations = $this->service->getView()->get();
         $phrases = $this->service->get(['page'])->get();
-        return view('pages.admin.translations.Phrase.index', compact('phrases'));
+        return view('pages.admin.translations.phrase.index', compact(['phrases','phrasesTranslations']));
     }
 
 
@@ -38,24 +41,29 @@ class PhraseController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(PhraseStoreUpdateRequest $request)
     {
-        dd($request->all());
-        $this->service->store($request->validated());
+        $data = $request->validated();
+        $object = $this->service->store($data);
+        $this->service->storeTranslation($object->id, $data['translations']);
         return  redirect()->route('phrase.index');
     }
 
 
     public function edit($id)
     {
-        $phrases = $this->service->show($id);
-        return view('pages.Admin.phrase.update', compact('phrases'));
+        $pages = $this->pageService->get()->get();
+        $languages = $this->languageService->get()->get();
+        $phrase = $this->service->show($id, ['translations', 'page']);
+        return view('pages.admin.translations.phrase.update', compact(['phrase','languages', 'pages']));
     }
 
 
-    public function update(PhraseUpdateRequest $request, $id)
+    public function update(PhraseStoreUpdateRequest $request, $id)
     {
-        $this->service->edit($id,$request->validated());
+        $data = $request->validated();
+        $object = $this->service->edit($id,$data);
+        $this->service->editTranslation($object->id, $data['translations']);
         return  redirect()->route('phrase.index');
 
     }
@@ -64,6 +72,12 @@ class PhraseController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
+        return  redirect()->route('phrase.index');
+
+    }
+    public function destroyTranslation($id)
+    {
+        $this->service->destroyTranslation($id);
         return  redirect()->route('phrase.index');
 
     }

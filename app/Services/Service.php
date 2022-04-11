@@ -12,7 +12,10 @@ class Service
     {
         return $this->repository->query($relation);
     }
-
+    public function getView($relation = null)
+    {
+        return $this->repository->queryView($relation);
+    }
 
     public function store($params)
     {
@@ -28,6 +31,10 @@ class Service
     {
         return $this->repository->show($id, $relation);
     }
+    public function showView($id, $relation = [])
+    {
+        return $this->repository->showView($id, $relation);
+    }
 
     public function delete($id)
     {
@@ -39,29 +46,19 @@ class Service
         return $this->repository->softDelete($id);
     }
 
-    public function getTranslation($relation = null)
+    public function storeTranslation($object_id, $translations)
     {
-        return $this->repository->queryTranslation($relation);
+        return $this->repository->createTranslation($object_id, $translations);
     }
 
-    public function showTranslation($id, $relation = null)
+    public function editTranslation($object_id, $translations)
     {
-        return $this->repository->showTranslation($id, $relation);
+        return $this->repository->updateTranslation($object_id, $translations);
+    }
+    public function destroyTranslation($id)
+    {
+        return $this->repository->deleteTranslation($id);
     }
 
-    public function storeTranslation($data)
-    {
-        return $this->repository->createTranslation($data);
-    }
-
-    public function editTranslation($id, $data)
-    {
-        return $this->repository->updateTranslation($id, $data);
-    }
-
-    public function deleteTranslation($id)
-    {
-        return $this->repository->destroyTranslation($id);
-    }
 
 }

@@ -4,25 +4,38 @@
 namespace App\Repositories;
 
 
-class Repository {
+class Repository
+{
 
-    protected  object $model;
-    protected  object $modelTranslation;
+    public object $model, $modelView, $modelTranslation;
 
     public function query($relation = null)
     {
-        if($relation){
+        if ($relation) {
             return $this->model->with(...$relation);
         }
         return $this->model->query();
     }
-    public function queryTranslation($relation = null)
+
+    public function queryView($relations = null)
     {
-        if($relation){
-            return $this->modelTranslation->with(...$relation);
+        if ($relations) {
+            return $this->modelView->with(...$relations);
         }
-        return $this->modelTranslation->query();
+        return $this->modelView->query();
     }
+
+    public function showView($id, $relations = null)
+    {
+        $model = $this->queryView($relations);
+        $model = $model->find($id);
+        if ($model) {
+            return response()->json($model);
+        } else {
+            return response('Not found', 404);
+        }
+    }
+
 
     public function create($data)
     {
@@ -37,7 +50,7 @@ class Repository {
         return $model;
     }
 
-    public function show($id,  $relation = null)
+    public function show($id, $relation = null)
     {
         $model = $this->query($relation);
         return $model->find($id);
@@ -62,29 +75,34 @@ class Repository {
             return response()->json('Not found', 404);
         }
     }
-    public function showTranslation($id,  $relation = null)
+
+
+    public function createTranslation($object_id, $translations)
     {
-        $model = $this->queryTranslation($relation);
-        return $model->find($id);
+        foreach ($translations as $key => $translation) {
+            $translation['object_id'] = $object_id;
+            $this->modelTranslation->create($translation);
+        }
     }
 
-    public function createTranslation($data)
+    public function updateTranslation($object_id, $translations)
     {
-        $this->modelTranslation->create($data);
+        foreach ($translations as $translation) {
+            $model = $this->modelTranslation->where('object_id', $object_id);
+            if ($model && isset($translation['id'])) {
+                $model->where('id', $translation['id'])
+                    ->update($translation);
+            } else {
+                $translation['object_id'] = $object_id;
+                $this->modelTranslation->create($translation);
+            }
+        }
     }
 
-    public function updateTranslation($id, $data)
+    public function deleteTranslation($id)
     {
-        $model = $this->queryTranslation();
-        $model = $model->find($id);
-        $model->update($data);
-        return $model;
+        $model = $this->modelTranslation::find($id);
+        $model->delete();
     }
 
-    public function destroyTranslation($id)
-    {
-        $model = $this->queryTranslation();
-        $model = $model->find($id);
-        return $model->delete($model);
-    }
 }

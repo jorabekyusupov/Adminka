@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/language', LanguageController::class);
         Route::resource('/phrase', PhraseController::class);
+        Route::delete('/translation-delete/{id}', [PhraseController::class, 'destroyTranslation'])->name('translation.destroy');
         Route::resource('/phrase-translation', PhraseTranslationController::class);
         Route::resource('/page', PageController::class);
     });

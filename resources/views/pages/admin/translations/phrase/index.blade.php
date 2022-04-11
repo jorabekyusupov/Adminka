@@ -83,22 +83,26 @@
                                             <tr >
                                                 <th>№</th>
                                                 <th>Word</th>
+                                                <th>Page</th>
+                                                <th>Language</th>
                                                 <th>translation</th>
                                                 <th>Action</th>
                                             </tr>
 
                                             </thead>
                                             <tbody>
-                                            @if(isset($phrases))
-                                                @foreach($phrases as $key=>$phrase)
+                                            @if(isset($phrasesTranslations))
+                                                @foreach($phrasesTranslations as $key=>$phrase)
                                                     <tr >
                                                         <th scope="row" >{{++$key}}</th>
                                                         <td>{{$phrase->word}}</td>
-                                                        <td>{{$phrase->page->name}}</td>
+                                                        <td>{{$phrase->page}}</td>
+                                                        <td>{{$phrase->language_code}}</td>
+                                                        <td>{{$phrase->translation}}</td>
                                                         <td >
                                                             <a class="badge bg-info"
                                                                href="{{route('phrase.edit', ['phrase' => $phrase->id])}}">Edit</a>
-                                                            <form action="{{ route('phrase.destroy', ['phrase'=>$phrase->id]) }}"
+                                                            <form action="{{ route('translation.destroy', ['id'=> $phrase->phrase_translation_id?? 0 ]) }}"
                                                                   class="d-inline-block" method="post">
                                                                 @method("delete")
                                                                 @csrf

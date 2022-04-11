@@ -5,7 +5,7 @@ namespace App\Http\Requests\Phrase;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PhraseStoreRequest extends FormRequest
+class PhraseStoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +33,10 @@ class PhraseStoreRequest extends FormRequest
         }
         return [
             'word' => $word,
-            'page_id' => ['required']
+            'page_id' => ['required'],
+            'translations.*.id' => ['nullable'],
+            'translations.*.language_code' => ['required', 'string'],
+            'translations.*.translation' => ['nullable', 'string']
         ];
     }
 }
