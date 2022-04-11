@@ -15,10 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $pass = 'admin1234';
-        $pass = bcrypt($pass);
-
-        DB::unprepared("insert into users (username,email,password) values ('superadmin','superadmin@gmail.com','$pass')");
+        $this->call(UserSeeder::class);
+        $this->call(LanguageSeeder::class);
+        $this->call(PageSeeder::class);
     }
 }

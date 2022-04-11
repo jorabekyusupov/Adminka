@@ -56,7 +56,7 @@
                                                     @if(isset($languages))
                                                         @foreach($languages as $language)
                                                                  <li class="nav-item">
-                                                                      <a class="nav-link " id="{{$language->code}}" data-toggle="tab" href="#{{$language->code}}-id" role="tab" aria-controls="{{$language->code}}" aria-selected="true">{{$language->name}}</a>
+                                                                      <a class="nav-link {{$language->code === 'eng' ? 'active' : ''}} " id="{{$language->code}}" data-toggle="tab" href="#{{$language->code}}-id" role="tab" aria-controls="{{$language->code}}" aria-selected="true">{{$language->name}}</a>
                                                                  </li>
                                                         @endforeach
                                                     @endif
@@ -66,11 +66,14 @@
                                                 <div class="tab-content pt-1">
                                                     @if(isset($languages))
                                                         @foreach($languages as $language)
-                                                                <div class="tab-pane " id="{{$language->code}}-id" role="tabpanel" aria-labelledby="{{$language->code}}">
+                                                                <div class="tab-pane {{$language->code === 'eng' ? 'active' : ''}}" id="{{$language->code}}-id" role="tabpanel" aria-labelledby="{{$language->code}}">
                                                                     <div class="col-12">
                                                                         <fieldset class="form-group">
-                                                                            <input type="text" class="form-control mb-1 d-none"  name="language_code_{{$language->code}}"  value="{{$language->code}}">
-                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translation_{{$language->code}}"></textarea>
+                                                                            <form name="translations[]">
+
+                                                                            <input type="text" class="form-control mb-1 d-none"  name="translations.*.language_code"  value="{{$language->code}}">
+                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations.*.translation"></textarea>
+                                                                            </form>
                                                                         </fieldset>
                                                                     </div>
                                                                    </div>

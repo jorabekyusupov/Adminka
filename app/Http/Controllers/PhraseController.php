@@ -40,7 +40,7 @@ class PhraseController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        dd($request->all());
         $this->service->store($request->validated());
         return  redirect()->route('phrase.index');
     }
