@@ -11,6 +11,9 @@ class Phrase extends Model
         'word'
     ];
 
+
+
+
     public function translation()
     {
         return $this->hasOne(PhraseTranslation::class, 'object_id', 'id');

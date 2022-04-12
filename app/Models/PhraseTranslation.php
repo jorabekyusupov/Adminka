@@ -11,4 +11,14 @@ class PhraseTranslation extends Model
         'translation',
         'language_code'
     ];
+
+    public function phrase()
+    {
+        return $this->belongsTo(Phrase::class,  'object_id', 'id' );
+    }
+
+    public function language()
+    {
+        return $this->hasOne(Language::class, 'code', 'language_code');
+    }
 }
