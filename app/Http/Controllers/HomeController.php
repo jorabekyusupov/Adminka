@@ -28,4 +28,10 @@ class HomeController extends Controller
         })->where('id', 1)->get();
         return view('welcome', compact(['phrase', 'lang', 'languages']));
     }
+
+    public function about()
+    {
+        $languages = $this->languageService->get()->get();
+        return view('about', compact([ 'languages']));
+    }
 }

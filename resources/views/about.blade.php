@@ -10,12 +10,12 @@
 <body>
 
 @foreach($languages as $language)
-<a href="{{route(Route::currentRouteName(), $language->code )}}">{{$language->name}}</a>
+    <a href="{{route(Route::currentRouteName(), $language->code )}}">{{$language->name}}</a>
 @endforeach
 
 <br>
 
-<h1>{{showPhrase('home', 'Company')}}</h1>
-<a href="{{app()->getLocale()}}/about">about</a>
+<h1>{{showPhrase('about', 'new')}}</h1>
+<a href="/">about</a>
 </body>
 </html>

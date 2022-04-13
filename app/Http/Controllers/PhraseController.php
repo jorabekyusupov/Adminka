@@ -36,7 +36,7 @@ class PhraseController extends Controller
         $filter = $data['filter'] ?? null;
 
         $search = $filter['search'] ?? null ;
-        $row =  $filter['row'] ?? 5;
+        $row =  $filter['row'] ?? 10;
         $language_code = $filter['language_code'] ?? null;
         $page_id = $filter['page_id'] ?? null;
         if ($filter){

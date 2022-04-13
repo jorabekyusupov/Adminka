@@ -19,7 +19,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="word" class="mb-2">Word</label>
-                                                <input type="text" id="word" class="form-control   @error('word') is-invalid @enderror" name="word" placeholder="Word"    >
+                                                <input type="text" id="word" class="form-control   @error('word') is-invalid @enderror" name="word" placeholder="Word" value="{{old('word')}}">
                                                 @error('word')
                                                 <div class="invalid-feedback ">{{$message}}</div>
                                                 @enderror
@@ -74,7 +74,7 @@
                                                                     <div class="col-12">
                                                                         <fieldset class="form-group" >
                                                                             <input type="text" class="form-control mb-1 d-none"  name="translations[{{$key}}][language_code]"  value="{{$language->code}}">
-                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations[{{$key}}][translation]"></textarea>
+                                                                            <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations[{{$key}}][translation]">{{old('translation')}}</textarea>
                                                                         </fieldset>
                                                                     </div>
                                                                    </div>

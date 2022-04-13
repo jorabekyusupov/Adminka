@@ -23,8 +23,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     });
 });
 
-Route::group(['prefix' => '{language}', 'middleware' => 'setLocale'], function () {
+Route::group(['prefix' => app()->getLocale(), 'middleware' => 'setLocale'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
 });
 
 
