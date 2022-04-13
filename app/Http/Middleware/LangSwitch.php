@@ -6,7 +6,7 @@ use App\Services\Language\LanguageService;
 use Closure;
 use Illuminate\Http\Request;
 
-class LanguageMiddleware
+class LangSwitch
 {
     protected LanguageService $languageService;
 
@@ -24,23 +24,24 @@ class LanguageMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-
         $languages= $this->languageService->get()->get();
 
-        $path = $request->server('PATH_INFO');
+        $path =$request->server('PATH_INFO');
         $arr = explode('/',$path);
-//        dd($path);
+        dd(app()->getLocale());
 
         foreach ($languages as $language){
             if ($language->code != $arr[1] ){
-                app()->setLocale(app()->getLocale());
+
+
                 return redirect(app()->getLocale().$path);
+
             }
             else{
                 return $next($request);
+
             }
         }
-
         return $next($request);
     }
 }

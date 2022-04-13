@@ -23,10 +23,16 @@ Route::group(['middleware' => ['auth:web']], function () {
     });
 });
 
-Route::group(['prefix' => app()->getLocale(), 'middleware' => 'setLocale'], function () {
+//Route::middleware(['setLocale'])->group(function() {
+//    Route::get('/about/contact', [HomeController::class, 'contact'])->name('bla');
+//});
+Route::group(['middleware' => ['setLocale'], 'prefix' => '{language}'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/about/contact', [HomeController::class, 'contact'])->name('bla');
     Route::get('/about', [HomeController::class, 'about'])->name('about');
 });
+
+http://localhost:8000/{lang}/about
 
 
 /*Route::middleware([

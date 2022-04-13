@@ -29,38 +29,35 @@ class PhraseController extends Controller
 
     public function index(IndexRequest $request)
     {
-
         $rows = [10,25,50,100];
-
         $data = $request->validated();
         $filter = $data['filter'] ?? null;
-
         $search = $filter['search'] ?? null ;
         $row =  $filter['row'] ?? 10;
         $language_code = $filter['language_code'] ?? null;
         $page_id = $filter['page_id'] ?? null;
-        if ($filter){
-            if ($language_code){
-                $phrasesTranslations = $this->service->getView()
-                    ->where('language_code', $language_code)
-                    ->paginate($row);
-            }
-            if ($page_id){
-                $phrasesTranslations = $this->service->getView()
-                    ->where('page_id', $page_id)
 
-                    ->paginate($row);
-            }
-            if ($search){
-                $phrasesTranslations = $this->service->getView()
-                    ->orWhere('word','like', '%'.$search.'%')
-                    ->orWhere('translation','like', '%'.$search.'%')
-                    ->orWhere('page','like', '%'.$search.'%')
-                    ->paginate($row);
-            }
-
+        $phrasesTranslations = $this->service->getView();
+        if (isset($filter)){
+                if ($search){
+                    $phrasesTranslations =   $phrasesTranslations
+                        ->where('word', 'like', '%'.$search.'%')
+                        ->orWhere('page', 'like', '%'.$search.'%')
+                        ->orWhere('translation', 'like', '%'.$search.'%')
+                        ->orWhere('word', 'like', '%'.$search.'%');
+                }
+                if ($language_code){
+                    $phrasesTranslations =   $phrasesTranslations->where('language_code', $language_code);
+                }
+                if ($page_id){
+                    $phrasesTranslations =  $phrasesTranslations->where('page_id', $page_id);
+                }
+            $phrasesTranslations =  $phrasesTranslations->orderby('id', 'DESC')->paginate($row);
+        } else {
+            $phrasesTranslations=$phrasesTranslations->orderby('id', 'DESC')->paginate($row);
         }
-         $phrasesTranslations = $this->service->getView()->paginate($row);
+
+//        dd($phrasesTranslations);
         $phrases = $this->service->get(['page'])->get();
         $pages = $this->pageService->get()->get();
         $languages = $this->languageService->get()->get();

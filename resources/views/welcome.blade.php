@@ -16,6 +16,8 @@
 <br>
 
 <h1>{{showPhrase('home', 'Company')}}</h1>
-<a href="{{app()->getLocale()}}/about">about</a>
+<a href="/about">about</a>
+<a href="/about/contact">about123</a>
+{{--<a href="{{ route('bla') }}"></a>--}}
 </body>
 </html>

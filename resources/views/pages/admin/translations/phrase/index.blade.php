@@ -16,17 +16,17 @@
        <!-- Nav tabs -->
        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
         <li class="nav-item">
-         <a class="nav-link {{request()->input('active') ? '' : 'active'}}" id="home-tab-fill" data-toggle="tab" href="#home-fill" role="tab" aria-controls="home-fill" aria-selected="true">Phrase</a>
+         <a class="nav-link {{request()->input('filter') || request()->input('page') ? '' : 'active'}}" id="home-tab-fill" data-toggle="tab" href="#home-fill" role="tab" aria-controls="home-fill" aria-selected="true">Phrase</a>
         </li>
         <li class="nav-item">
-         <a class="nav-link {{request()->input('active') ? 'active' : ''}}" id="profile-tab-fill" data-toggle="tab" href="#profile-fill" role="tab" aria-controls="profile-fill" aria-selected="false">Translations</a>
+         <a class="nav-link {{request()->input('filter') || request()->input('page') ? 'active' : ''}}" id="profile-tab-fill" data-toggle="tab" href="#profile-fill" role="tab" aria-controls="profile-fill" aria-selected="false">Translations</a>
         </li>
 
        </ul>
 
 
        <div class="tab-content pt-1">
-        <div class="tab-pane {{request()->input('active') ? '' : 'active'}}" id="home-fill" role="tabpanel" aria-labelledby="home-tab-fill">
+        <div class="tab-pane {{request()->input('filter') || request()->input('page') ? '' : 'active'}}" id="home-fill" role="tabpanel" aria-labelledby="home-tab-fill">
          <div class="card-body p-1">
           <a class="btn btn-primary" href="{{ route('phrase.create') }}">Create</a>
          </div>
@@ -65,12 +65,12 @@
           </table>
          </div>
         </div>
-        <div class="tab-pane {{request()->input('active') ? 'active' : ''}}" id="profile-fill" role="tabpanel" aria-labelledby="profile-tab-fill">
+        <div class="tab-pane {{request()->input('filter') || request()->input('page') ? 'active' : ''}}" id="profile-fill" role="tabpanel" aria-labelledby="profile-tab-fill">
          <div class="card-body p-1">
           <div class="col-12 p-0">
-           <form action="{{ route('phrase.index') }}" method="post" class="d-flex align-items-center justify-content-between">
-            @method('get')
-            @csrf
+           <form action="{{ route('phrase.index') }}" method="get" class="d-flex align-items-center justify-content-between">
+
+
                <input type="text" class="d-none" name="active" value="a">
             <div class="form-group d-flex align-items-center col-9 m-0 p-0">
              <div class="form-group col-2 m-0">
@@ -87,7 +87,7 @@
                @if (isset($pages))
                 <option selected disabled>Page</option>
                 @foreach ($pages as $page)
-                 <option value="{{ $page->id }}">{{ $page->name }}</option>
+                 <option value="{{ $page->id }}" {{request()->input('filter.page_id') && intval(request()->input('filter.page_id')) === $page->id ? 'selected' : ''}}>{{ $page->name }}</option>
                 @endforeach
                @else
                 <option selected disabled>Not Found</option>
@@ -100,7 +100,7 @@
                 <option selected disabled>Languages</option>
 
                 @foreach ($languages as $language)
-                 <option value="{{ $language->code }}" >{{ $language->name }}</option>
+                 <option value="{{ $language->code }}"  {{ request()->input('filter.language_code') && request()->input('filter.language_code') === $language->code ? 'selected' : ''}} >{{ $language->name }}</option>
                 @endforeach
                @else
                 <option selected disabled>not found lang</option>
@@ -110,7 +110,7 @@
             </div>
             <div class="form-group col-3 m-0">
              <div  class=" position-relative input-divider-right">
-              <input onchange="this.form.submit()" type="text" class="form-control" name="filter[search]" id="iconLeft4" placeholder="Search" value="">
+              <input onchange="this.form.submit()" type="text" class="form-control" name="filter[search]" id="iconLeft4" placeholder="Search" value="{{request()->input('filter.search') ?? '' }}">
               <div class="form-control-position">
                <i class="feather icon-search"></i>
               </div>

@@ -34,4 +34,9 @@ class HomeController extends Controller
         $languages = $this->languageService->get()->get();
         return view('about', compact([ 'languages']));
     }
+    public function contact()
+    {
+        $languages = $this->languageService->get()->get();
+        return view('about', compact([ 'languages']));
+    }
 }
