@@ -1,7 +1,7 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template-dark/index.html">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="/admin">
                     <div class="brand-logo"></div>
                     <h2 class="brand-text mb-0">Vuexy</h2>
                 </a></li>
@@ -20,7 +20,7 @@
 
             <li class="navigation-header"> <span> Settings</span>
             </li>
-            <li class=" nav-item"><a href=""><i class="feather icon-globe"></i><span class="menu-title" data-i18n="Documentation">Languages</span></a>
+            <li class=" nav-item"><a href="/admin/language"><i class="feather icon-globe"></i><span class="menu-title" data-i18n="Documentation">Languages</span></a>
             </li>
 
         </ul>

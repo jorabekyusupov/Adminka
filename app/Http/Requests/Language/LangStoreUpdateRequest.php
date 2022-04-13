@@ -5,7 +5,7 @@ namespace App\Http\Requests\Language;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class LangUpdateRequest extends FormRequest
+class LangStoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -37,7 +37,8 @@ class LangUpdateRequest extends FormRequest
         }
         return [
             'name' => ['required', $unique],
-            'code' => ['required', $unique]
+            'code' => ['required', $unique],
+            'is_active' => ['nullable']
         ];
     }
 }

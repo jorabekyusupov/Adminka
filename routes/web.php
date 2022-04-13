@@ -8,11 +8,14 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 
-require_once  __DIR__ .'/fortify.php';
+require_once __DIR__ . '/fortify.php';
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::group(['middleware' => 'auth:web'], function () {
-    Route::prefix('admin')->group(function (){
+Route::get('/', function () {
+    return redirect(app()->getLocale());
+});
+
+Route::group(['middleware' => ['auth:web']], function () {
+    Route::prefix('/admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/language', LanguageController::class);
         Route::resource('/phrase', PhraseController::class);
@@ -21,6 +24,11 @@ Route::group(['middleware' => 'auth:web'], function () {
         Route::resource('/page', PageController::class);
     });
 });
+
+Route::group(['prefix' => '{language}', 'middleware' => 'setLocale'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
+
 
 /*Route::middleware([
     'auth:sanctum',

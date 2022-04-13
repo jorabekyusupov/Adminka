@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
@@ -87,6 +88,7 @@
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
+<script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
 
 
 <!-- END: Page Vendor JS-->
@@ -98,6 +100,8 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
+<script src="{{asset('app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+
 <!-- END: Page JS-->
 
 </body>

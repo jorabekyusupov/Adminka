@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Language\LangStoreRequest;
-use App\Http\Requests\Language\LangUpdateRequest;
+use App\Http\Requests\Language\LangStoreUpdateRequest;
 use App\Services\Language\LanguageService;
 use Illuminate\Http\Request;
 
@@ -17,17 +17,17 @@ class LanguageController extends Controller
     public function index()
     {
         $languages = $this->service->get()->get();
-        return view('pages.Admin.Languages.index', compact('languages'));
+        return view('pages.admin.settings.language.index', compact('languages'));
     }
 
 
     public function create()
     {
-        return view('pages.Admin.Languages.create');
+        return view('pages.admin.settings.language.create');
     }
 
 
-    public function store(LangStoreRequest $request)
+    public function store(LangStoreUpdateRequest $request)
     {
         $this->service->store($request->validated());
         return  redirect()->route('language.index');
@@ -37,10 +37,10 @@ class LanguageController extends Controller
     public function edit($id)
     {
         $language = $this->service->show($id);
-        return view('pages.Admin.Languages.update', compact('language'));
+        return view('pages.admin.settings.language.update', compact('language'));
     }
 
-    public function update(LangUpdateRequest $langUpdateRequest, $id)
+    public function update(LangStoreUpdateRequest $langUpdateRequest, $id)
     {
         $this->service->edit($id,$langUpdateRequest->validated());
         return  redirect()->route('language.index');

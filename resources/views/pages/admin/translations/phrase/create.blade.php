@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" action="{{route('phrase.store')}}" method="post">
+                            <form class="form form-vertical" action="{{route('phrase.store')}}" method="post" >
                                 @method('post')
                                 @csrf
                                 <div class="form-body">
@@ -19,7 +19,10 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="word" class="mb-2">Word</label>
-                                                <input type="text" id="word" class="form-control" name="word" placeholder="Word">
+                                                <input type="text" id="word" class="form-control   @error('word') is-invalid @enderror" name="word" placeholder="Word"    >
+                                                @error('word')
+                                                <div class="invalid-feedback ">{{$message}}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -31,7 +34,8 @@
                                                     <li class="d-inline-block mr-2">
                                                         <fieldset>
                                                             <div class="vs-radio-con">
-                                                                <input type="radio" name="page_id"  value="{{$page->id}}">
+                                                                <input  type="radio" name="page_id" {{$page->id===1 ? 'checked' : ''}}  value="{{$page->id}}">
+
                                                                 <span class="vs-radio">
                                                             <span class="vs-radio--border"></span>
                                                             <span class="vs-radio--circle"></span>

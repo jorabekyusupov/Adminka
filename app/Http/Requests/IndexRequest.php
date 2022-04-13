@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Language;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LangStoreRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class LangStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'code' => ['required']
+            'filter.search' =>['nullable'],
+            'filter.row' => ['nullable'],
+            'filter.language_code' =>['nullable'],
+            'filter.page_id' => ['nullable']
         ];
     }
 }
