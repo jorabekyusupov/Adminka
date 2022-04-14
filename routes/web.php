@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PhraseController;
-use App\Http\Controllers\PhraseTranslationController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
+
+
+
 
 require_once __DIR__ . '/fortify.php';
 
@@ -19,6 +21,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/language', LanguageController::class);
         Route::resource('/phrase', PhraseController::class);
+        Route::resource('/post', PostController::class);
         Route::delete('/translation-delete/{id}', [PhraseController::class, 'destroyTranslation'])->name('translation.destroy');
     });
 });

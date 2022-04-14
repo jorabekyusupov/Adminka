@@ -7,8 +7,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description"
+          content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+          content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>Dashboard analytics - Vuexy - Bootstrap HTML admin template</title>
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
@@ -17,6 +19,11 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/katex.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('app-assets/vendors/css/editors/quill/monokai-sublime.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/quill.snow.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/quill.bubble.css')}}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -42,7 +49,8 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  "
+      data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
 
 <!-- BEGIN: Header-->
 @include('layouts.elements.navbar')
@@ -76,12 +84,18 @@
 
 <!-- BEGIN: Footer-->
 <footer class="footer footer-static footer-light">
-    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2019<a
+                class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent,</a>All rights Reserved</span><span
+            class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                class="feather icon-heart pink"></i></span>
         <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
     </p>
 </footer>
 <!-- END: Footer-->
+<script>
 
+
+</script>
 
 <!-- BEGIN: Vendor JS-->
 <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
@@ -89,7 +103,11 @@
 
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
-
+<script src="{{asset('app-assets/vendors/js/editors/quill/katex.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/editors/quill/highlight.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/editors/quill/quill.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/extensions/jquery.steps.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 
 <!-- END: Page Vendor JS-->
 
@@ -101,9 +119,59 @@
 
 <!-- BEGIN: Page JS-->
 <script src="{{asset('app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+<script src="{{asset('app-assets/js/scripts/editors/editor-quill.js')}}"></script>
 
 <!-- END: Page JS-->
+@foreach($languages as $language)
 
+<script >
+    var fullEditor = new Quill('#full-container .{{$language->code}}', {
+        bounds: '#full-container .{{$language->code}}',
+        modules: {
+            'formula': true,
+            'syntax': true,
+            'toolbar': [
+                [{
+                    'font': []
+                }, {
+                    'size': []
+                }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{
+                    'color': []
+                }, {
+                    'background': []
+                }],
+                [{
+                    'script': 'super'
+                }, {
+                    'script': 'sub'
+                }],
+                [{
+                    'header': '1'
+                }, {
+                    'header': '2'
+                }, 'blockquote', 'code-block'],
+                [{
+                    'list': 'ordered'
+                }, {
+                    'list': 'bullet'
+                }, {
+                    'indent': '-1'
+                }, {
+                    'indent': '+1'
+                }],
+                ['direction', {
+                    'align': []
+                }],
+                ['link', 'image', 'video', 'formula'],
+                ['clean']
+            ],
+        },
+        theme: 'snow'
+    });
+</script>
+@endforeach
 </body>
 <!-- END: Body-->
 

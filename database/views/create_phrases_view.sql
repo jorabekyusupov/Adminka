@@ -9,6 +9,6 @@ SELECT p.id,
        pt.language_code,
        pt.translation
 FROM phrases p
-         LEFT JOIN phrase_translations pt ON p.id = pt.object_id
+         JOIN phrase_translations pt ON p.id = pt.object_id
          JOIN pages pg on pg.id = p.page_id
 

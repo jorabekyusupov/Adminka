@@ -37,7 +37,7 @@ class PhraseController extends Controller
         $language_code = $filter['language_code'] ?? null;
         $page_id = $filter['page_id'] ?? null;
 
-        $phrasesTranslations = $this->service->getView();
+        $phrasesTranslations = $this->service->getView()->whereNotNull('translation');
         if (isset($filter)){
                 if ($search){
                     $phrasesTranslations =   $phrasesTranslations

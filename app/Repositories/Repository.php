@@ -80,10 +80,8 @@ class Repository
     public function createTranslation($object_id, $translations)
     {
         foreach ($translations as $key => $translation) {
-            if ($translation['translation']) {
                 $translation['object_id'] = $object_id;
                 $this->modelTranslation->create($translation);
-            }
         }
     }
 
@@ -91,7 +89,7 @@ class Repository
     {
         foreach ($translations as $translation) {
             $model = $this->modelTranslation->where('object_id', $object_id);
-            if ($model && isset($translation['id'] ) && $translation['translation']) {
+            if ($model && isset($translation['id'])) {
                 $model->where('id', $translation['id'])
                     ->update($translation);
             } else {
