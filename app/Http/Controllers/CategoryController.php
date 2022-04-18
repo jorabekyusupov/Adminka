@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostCategory\PostCatStoreUpdateRequest;
 use App\Services\Category\CategoryService;
+use App\Services\File\FileService;
 use App\Services\Language\LanguageService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     protected LanguageService $languageService;
+    protected FileService $fileService;
 
-    public function __construct(CategoryService $service, LanguageService $languageService)
+    public function __construct(CategoryService $service, LanguageService $languageService, FileService $fileService)
     {
         $this->service = $service;
         $this->languageService = $languageService;
+        $this->fileService = $fileService;
     }
 
 
@@ -37,8 +40,10 @@ class CategoryController extends Controller
     public function store(PostCatStoreUpdateRequest $request)
     {
         $data = $request->validated();
+        dd($request->all());
         $object = $this->service->store($data);
         $this->service->storeTranslation($object->id, $data['translations']);
+        $this->fileService->storeFile($data, '/app/public/files/categories/', $object->id, 'category');
         return redirect()->route('post-categories.index');
     }
 
@@ -59,7 +64,7 @@ class CategoryController extends Controller
     {
         $data =  $request->validated();
         $this->service->edit($id,$data);
-        $this->service->editTranslation($id, $data['translations']);    
+        $this->service->editTranslation($id, $data['translations']);
     }
 
 

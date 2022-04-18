@@ -25,6 +25,7 @@ class PostCatStoreUpdateRequest extends FormRequest
     {
         return [
             'parent_id' => ['nullable', 'integer'],
+            'file' => ['nullable',  'file','image','mimes:jpeg,bmp,png,jpg', 'max:8192'],
             'translations.*.id' => ['nullable'],
             'translations.*.language_code' => ['required', 'string'],
             'translations.*.title' => ['nullable', 'string'],
