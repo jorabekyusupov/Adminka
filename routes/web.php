@@ -6,6 +6,7 @@ use App\Http\Controllers\PhraseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 
 
@@ -22,7 +23,10 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::resource('/language', LanguageController::class);
         Route::resource('/phrase', PhraseController::class);
         Route::resource('/post', PostController::class);
-        Route::delete('/translation-delete/{id}', [PhraseController::class, 'destroyTranslation'])->name('translation.destroy');
+        Route::resource('/post-categories', CategoryController::class);
+        Route::delete('/phrase-translation-delete/{id}', [PhraseController::class, 'destroyTranslation'])->name('phrase.translation.destroy');
+        Route::delete('/post-ct-delete/{id}', [PostController::class, 'destroyTranslations'])->name('post_ct.translation.destroy');
+        Route::delete('/ct-delete/{id}', [CategoryController::class, 'destroyTranslations'])->name('ct.translation.destroy');
     });
 });
 

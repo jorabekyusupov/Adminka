@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CategoryTranslation extends Model
 {
     use HasFactory;
+    protected $fillable = ['object_id', 'language_code', 'title'];
 }

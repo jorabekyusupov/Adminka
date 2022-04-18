@@ -143,6 +143,22 @@
       });
     });
 
+      if (jQuery().summernote) {
+          $(".summernote").summernote({
+              dialogsInBody: true,
+              minHeight: 250
+          });
+          $(".summernote-simple").summernote({
+              dialogsInBody: true,
+              minHeight: 150,
+              toolbar: [
+                  ["style", ["bold", "italic", "underline", "clear"]],
+                  ["font", ["strikethrough"]],
+                  ["para", ["paragraph"]]
+              ]
+          });
+      }
+
     // Close Card
     $('a[data-action="close"]').on("click", function () {
       $(this).closest(".card").removeClass().slideUp("fast");

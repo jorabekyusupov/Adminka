@@ -19,11 +19,15 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/katex.min.css')}}">
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('app-assets/vendors/css/editors/quill/monokai-sublime.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/quill.snow.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/quill.bubble.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/editors/quill/monokai-sublime.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/js/summernote/summernote-bs4.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/js/jquery-selectric/selectric.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -35,13 +39,15 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/themes/semi-dark-layout.css')}}">
 
     <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/core/colors/palette-gradient.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/animate/animate.css')}}">
+
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <!-- END: Custom CSS-->
 
 </head>
@@ -102,76 +108,38 @@
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
+<script src="{{asset('app-assets/vendors/js/jquery-selectric/jquery.selectric.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/summernote/summernote-bs4.js')}}"></script>
 <script src="{{asset('app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')}}"></script>
 <script src="{{asset('app-assets/vendors/js/editors/quill/katex.min.js')}}"></script>
 <script src="{{asset('app-assets/vendors/js/editors/quill/highlight.min.js')}}"></script>
-<script src="{{asset('app-assets/vendors/js/editors/quill/quill.min.js')}}"></script>
 <script src="{{asset('app-assets/vendors/js/extensions/jquery.steps.min.js')}}"></script>
 <script src="{{asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/forms/icheck/icheck.min.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/pickers/pickadate/picker.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/pickers/pickadate/picker.date.js')}}"></script>
+<script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+
+
 
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
+<script src="{{asset('app-assets/js/scripts.js')}}"></script>
 <script src="{{asset('app-assets/js/core/app-menu.js')}}"></script>
 <script src="{{asset('app-assets/js/core/app.js')}}"></script>
 <script src="{{asset('app-assets/js/scripts/components.js')}}"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
+<script src="{{asset('app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
+<script src="{{asset('app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js')}}"></script>
 <script src="{{asset('app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
-<script src="{{asset('app-assets/js/scripts/editors/editor-quill.js')}}"></script>
+
 
 <!-- END: Page JS-->
-@foreach($languages as $language)
 
-<script >
-    var fullEditor = new Quill('#full-container .{{$language->code}}', {
-        bounds: '#full-container .{{$language->code}}',
-        modules: {
-            'formula': true,
-            'syntax': true,
-            'toolbar': [
-                [{
-                    'font': []
-                }, {
-                    'size': []
-                }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{
-                    'color': []
-                }, {
-                    'background': []
-                }],
-                [{
-                    'script': 'super'
-                }, {
-                    'script': 'sub'
-                }],
-                [{
-                    'header': '1'
-                }, {
-                    'header': '2'
-                }, 'blockquote', 'code-block'],
-                [{
-                    'list': 'ordered'
-                }, {
-                    'list': 'bullet'
-                }, {
-                    'indent': '-1'
-                }, {
-                    'indent': '+1'
-                }],
-                ['direction', {
-                    'align': []
-                }],
-                ['link', 'image', 'video', 'formula'],
-                ['clean']
-            ],
-        },
-        theme: 'snow'
-    });
-</script>
-@endforeach
+
 </body>
 <!-- END: Body-->
 

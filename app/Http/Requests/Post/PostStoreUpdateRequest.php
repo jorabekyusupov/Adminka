@@ -24,10 +24,13 @@ class PostStoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'created_date' => ['nullable', 'datetime'],
+            'created_date' => ['nullable'],
             'views_count' => ['nullable', 'integer'],
             'keywords' => ['nullable', 'string'],
-            'file' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:8196'],
+            'category_id' => ['required', 'array'],
+            'category_id.*' => ['exists:categories,id'],
+            'files' =>  ['nullable', 'array'],
+            'files.*' => ['nullable',  'file','image','mimes:jpeg,bmp,png,jpg', 'max:8192'],
             'translations.*.id' => ['nullable'],
             'translations.*.language_code' => ['required', 'string'],
             'translations.*.title' => ['nullable', 'string'],

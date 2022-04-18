@@ -34,20 +34,20 @@ trait FileUpload
 
     public function filesUpload($data, $path, $object_id, $object_type)
     {
-        $files = request()->input('files');
-
-        if ($files) {
-            $data['object_id'] = $object_id;
-            $data['object_type'] = $object_type;
-            foreach ($files as $key => $item) {
-                $fileName = time() . '_' . $key . '.' . $item->extension();
-                Storage::putFileAs($path, $data['files'], $fileName);
-                $data['full_size_path'] = $fileName;
-                $data['orginal_name'] = $item->getClientOriginalName();
-                $this->fileService->store($data);
-            }
-
-        }
+//        $files = request('files');
+//dd($files);
+//        if (request()->hasFile('files')) {
+//            $data['object_id'] = $object_id;
+//            $data['object_type'] = $object_type;
+//            foreach ($files as $key => $item) {
+//                $fileName = time() . '_' . $key . '.' . $item->extension();
+//                Storage::putFileAs($path, $data['files'], $fileName);
+//                $data['full_size_path'] = $fileName;
+//                $data['original_name'] = $item->getClientOriginalName();
+//                $this->fileService->store($data);
+//            }
+//
+//        }
 
         return $data;
     }

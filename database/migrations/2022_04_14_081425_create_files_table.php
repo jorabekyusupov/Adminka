@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('object_id');
             $table->string('full_size_path');
             $table->string('thumbnail_path')->nullable();
-            $table->string('orginal_name');
+            $table->string('original_name');
             $table->timestamps();
         });
     }

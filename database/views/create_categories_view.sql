@@ -5,5 +5,5 @@ SELECT c.id,
        ct.language_code,
        ct.id as category_translation_id
 FROM categories c
-         LEFT JOIN category_translations ct ON c.id = ct.object_id;
+          JOIN category_translations ct ON c.id = ct.object_id;
 

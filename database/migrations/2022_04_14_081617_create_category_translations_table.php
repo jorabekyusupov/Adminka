@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('object_id');
             $table->string('language_code');
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->timestamps();
         });
     }

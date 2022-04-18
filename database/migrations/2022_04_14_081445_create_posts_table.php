@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('created_date')->default(now());
+            $table->date('created_date')->default(date('Y-m-d'));
             $table->integer('views_count')->default(1);
+            $table->boolean('is_active')->default(true);
             $table->string('keywords')->nullable();
             $table->timestamps();
         });

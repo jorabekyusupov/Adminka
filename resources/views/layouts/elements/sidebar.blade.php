@@ -12,15 +12,28 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
+            <li class="navigation-header"><span>Pages</span>
+            </li>
+            <li class="nav-item"><a href="#"><i class="feather icon-type"></i><span class="menu-title" >Posts</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/post"><i class="feather icon-type"></i><span class="menu-item" >Post</span></a>
+                    </li>
+                    <li><a href="/admin/post-categories"><i class="feather icon-filter"></i><span class="menu-item" >Post Categories</span></a>
+                    </li>
+
+                </ul>
+            </li>
+
+
             <li class="navigation-header"><span>Translations</span>
             </li>
-            <li class=" nav-item"><a href="/admin/phrase"><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Documentation">Phrase</span></a>
+            <li class=" nav-item"><a href="/admin/phrase"><i class="feather icon-file-text"></i><span class="menu-title" >Phrase</span></a>
             </li>
 
 
             <li class="navigation-header"> <span> Settings</span>
             </li>
-            <li class=" nav-item"><a href="/admin/language"><i class="feather icon-globe"></i><span class="menu-title" data-i18n="Documentation">Languages</span></a>
+            <li class=" nav-item"><a href="/admin/language"><i class="feather icon-globe"></i><span class="menu-title" >Languages</span></a>
             </li>
 
         </ul>

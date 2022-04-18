@@ -144,7 +144,7 @@
                <td>{{ $phrase->translation }}</td>
                <td>
                 <a class="badge bg-info" href="{{ route('phrase.edit', ['phrase' => $phrase->id]) }}">Edit</a>
-                <form action="{{ route('translation.destroy', ['id' => $phrase->phrase_translation_id ?? 0]) }}" class="d-inline-block" method="post">
+                <form action="{{ route('phrase.translation.destroy', ['id' => $phrase->phrase_translation_id ?? 0]) }}" class="d-inline-block" method="post">
                  @method("delete")
                  @csrf
                  <button type="submit" class="badge bg-danger border-0">

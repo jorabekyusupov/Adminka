@@ -9,13 +9,20 @@
 (function(window, document, $) {
     'use strict';
 
+
     /*******    Pick-a-date Picker  *****/
     // Basic date
-    $('.pickadate').pickadate();
+
+    $('.pickadate').pickadate({
+        format:'yyyy/mm/dd',
+
+
+    });
+
 
     // Format Date Picker
     $('.format-picker').pickadate({
-        format: 'mmmm, d, yyyy'
+        format: 'dd/mm/yyyy',
     });
 
     // Date limits
