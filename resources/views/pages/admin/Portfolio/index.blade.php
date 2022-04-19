@@ -21,19 +21,13 @@
 
  <div class="d-flex justify-content-between align-items-center">
   <div class="card col-3 full-height-vh mr-1">
-
+   <div class="card-header">
+    <h3>Categories</h3>
+   </div>
    <div class="card-body">
     <form action="{{ route('post.index') }}" method="get">
      @method('get')
-        <fieldset class="form-group position-relative">
-            <input type="text" class="form-control search-product" id="iconLeft5" name="search" placeholder="Search here">
-            <div class="form-control-position">
-                <i class="feather icon-search"></i>
-            </div>
-        </fieldset>
      <div class="form-group">
-
-             <h3>Categories</h3>
 
       <ul class="list-unstyled mb-0 d-flex flex-column justify-content-between">
        <li class="d-inline-block mr-2">
@@ -95,7 +89,12 @@
   <div class=" col-9 full-height-vh" style="overflow-y: scroll">
    <form action="{{ route('post.index') }}" method="get">
     @method('get')
-
+    <fieldset class="form-group position-relative">
+     <input style="background-color: #10163a;" type="text" class="form-control search-product" id="iconLeft5" name="search" placeholder="Search here">
+     <div class="form-control-position">
+      <i class="feather icon-search"></i>
+     </div>
+    </fieldset>
    </form>
 
    <div class="row match-height">
@@ -104,7 +103,7 @@
       <div class="col-xl-4 col-md-6 col-sm-12">
        <div class="card">
         <div class="card-content">
-         <img class="card-img-top img-fluid" src="{{ count($post->files) > 0 ? asset('storage/files/posts/'.$post->files[0]->thumbnail_path) : asset('app-assets/images/pages/content-img-1.jpg') }}" alt="Card image cap">
+         <img class="card-img-top img-fluid" src="../../../app-assets/images/pages/content-img-1.jpg" alt="Card image cap">
          <div class="card-body">
           <h5>{{ $post->title }}</h5>
           <p class="card-text  mb-0">{{ $post->sub_title }}</p>

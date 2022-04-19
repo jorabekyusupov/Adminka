@@ -6,11 +6,15 @@ namespace App\Services;
 class Service
 {
 
-    protected object $repository;
+    public object $repository;
 
     public function get($relation = null)
     {
         return $this->repository->query($relation);
+    }
+    public function getTranslation($relation = null)
+    {
+        return $this->repository->queryTranslation($relation);
     }
     public function getView($relation = null)
     {

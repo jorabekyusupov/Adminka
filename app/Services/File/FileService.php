@@ -26,7 +26,10 @@ class FileService extends Service
                 $file = $name . '.' . $item->extension();
                 $data['thumbnail_path'] = $name . '_thumbnail.' . $item->extension();
                 $item->move(storage_path() . $path, $file);
-                Image::make(storage_path($path . $file))->resize(300, 200)->save(storage_path($path . $data['thumbnail_path']));
+                Image::make(storage_path($path . $file))->resize(600, 600, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save(storage_path($path . $data['thumbnail_path']));
                 $data['full_size_path'] = $file;
                 $data['original_name'] = $item->getClientOriginalName();
                 $this->store($data);

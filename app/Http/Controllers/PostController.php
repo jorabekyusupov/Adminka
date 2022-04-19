@@ -40,9 +40,12 @@ class PostController extends Controller
         $category_id = request()->input('category_id') ?? null;
         $search = request()->input('search') ?? null;
         $language_code = request()->input('language_code') ?? auth()->user()->language_code;
-        $posts = $this->service->getView();
+        $posts = $this->service->getView(['categories', 'files']);
+
         if (isset($category_id) && $category_id != 0) {
-            $posts = $posts->where('category_id', $category_id);
+            $posts = $posts->whereHas('categories', function ($query) use ($category_id) {
+                $query->where('category_id', $category_id);
+            });
             if ($category_id && isset($language_code)) {
                 $posts = $posts->where('language_code', $language_code);
                 if ( isset($search)) {
@@ -144,6 +147,13 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+
+        $this->service->getTranslation()->where('object_id', $id)->each(function ($item) {
+            $this->service->delete($item->id);
+        });
+        $this->postCategoryService->get()->where('post_id', $id)->each(function ($item) {
+            $this->postCategoryService->delete($item->id);
+        });
         $this->service->delete($id);
         return redirect()->route('post.index');
     }

@@ -16,6 +16,13 @@ class Repository
         }
         return $this->model->query();
     }
+    public function queryTranslation($relation = null)
+    {
+        if ($relation) {
+            return $this->modelTranslation->with(...$relation);
+        }
+        return $this->modelTranslation->query();
+    }
 
     public function queryView($relations = null)
     {
