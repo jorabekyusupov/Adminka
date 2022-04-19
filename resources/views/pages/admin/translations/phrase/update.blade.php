@@ -59,7 +59,7 @@
           @if (isset($languages))
            @foreach ($languages as $language)
             <li class="nav-item">
-             <a class="nav-link {{ $language->code === 'en' ? 'active' : '' }} " id="{{ $language->code }}" data-toggle="tab" href="#{{ $language->code }}-id" role="tab" aria-controls="{{ $language->code }}" aria-selected="true">{{ $language->name }}</a>
+             <a class="nav-link {{ $language->code === auth()->user()->language_code ? 'active' : '' }} " id="{{ $language->code }}" data-toggle="tab" href="#{{ $language->code }}-id" role="tab" aria-controls="{{ $language->code }}" aria-selected="true">{{ $language->name }}</a>
             </li>
            @endforeach
           @endif
@@ -76,14 +76,14 @@
          <div class="tab-content pt-1">
           @if (isset($languages))
            @foreach ($languages as $key => $language)
-            <div class="tab-pane {{ $language->code === 'en' ? 'active' : '' }}" id="{{ $language->code }}-id" role="tabpanel" aria-labelledby="{{ $language->code }}">
+            <div class="tab-pane {{ $language->code === auth()->user()->language_code ? 'active' : '' }}" id="{{ $language->code }}-id" role="tabpanel" aria-labelledby="{{ $language->code }}">
              <div class="col-12">
               @foreach ($translations as $key => $translation)
                @if ($translation->language_code === $language->code)
                 <fieldset class="form-group">
                  <input type="text" class="form-control mb-1 d-none" {{ $translation->id ?? 'disabled' }} name="translations[{{ $key }}][id]" value="{{ $translation->id }}">
                  <input type="text" class="form-control mb-1 d-none" name="translations[{{ $key }}][language_code]" value="{{ $translation->language_code }}">
-                 <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations[{{ $key }}][translation]">{{ $translation->translation }}</textarea>
+                 <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations ({{ $language->name }})" name="translations[{{ $key }}][translation]">{{ $translation->translation }}</textarea>
                 </fieldset>
                @endif
               @endforeach
@@ -95,7 +95,7 @@
 
                 <fieldset class="form-group">
                  <input type="text" class="form-control mb-1 d-none" name="translations[{{ $random }}][language_code]" value="{{ $language->code }}">
-                 <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations" name="translations[{{ $random }}][translation]"></textarea>
+                 <textarea class="form-control" id="basicTextarea" rows="5" placeholder="Translations ({{ $language->name }})" name="translations[{{ $random }}][translation]"></textarea>
                 </fieldset>
                @endif
               @endforeach

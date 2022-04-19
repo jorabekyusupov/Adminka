@@ -33,7 +33,7 @@
        <li class="d-inline-block mr-2">
         <fieldset>
          <div class="vs-radio-con">
-          <input onchange="this.form.submit()" {{ !request()->input('category_id') ? 'checked' : '' }} type="radio" name="category_id" value="{{ 0 }}">
+          <input onchange="this.form.submit()" {{ !request()->input('category_id') ? 'checked' : '' }} type="radio" name="category_id" value="">
           <span class="vs-radio">
            <span class="vs-radio--border"></span>
            <span class="vs-radio--circle"></span>

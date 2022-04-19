@@ -23,8 +23,40 @@
 
                 </ul>
             </li>
+            <li class="nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" >Products</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/post"><i class="feather icon-shopping-bag"></i><span class="menu-item" >Products</span></a>
+                    </li>
+                    <li><a href="/admin/post"><i class="feather icon-filter"></i><span class="menu-item" >Categories</span></a>
+                    </li>
+                    <li><a href="/admin/post-categories"><i class="feather icon-slack"></i><span class="menu-item" >Brands</span></a>
+                    </li>
 
+                </ul>
+            </li>
 
+            <li class="nav-item"><a href="#"><i class="feather icon-folder"></i><span class="menu-title" >Documents</span></a>
+                <ul class="menu-content">
+
+                    <li><a href="/admin/post"><i class="feather icon-paperclip"></i><span class="menu-item" >Documents</span></a>
+                    </li>
+                    <li><a href="/admin/post"><i class="feather icon-filter"></i><span class="menu-item" >Categories</span></a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item"><a href="#"><i class="feather icon-folder"></i><span class="menu-title" >Portfolio</span></a>
+                <ul class="menu-content">
+
+                    <li><a href="/admin/post"><i class="feather icon-paperclip"></i><span class="menu-item" >Documents</span></a>
+                    </li>
+                    <li><a href="/admin/post"><i class="feather icon-filter"></i><span class="menu-item" >Categories</span></a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class=" nav-item"><a href="/admin/language"><i class="feather icon-layers"></i><span class="menu-title" >Services</span></a>
+            </li>
             <li class="navigation-header"><span>Translations</span>
             </li>
             <li class=" nav-item"><a href="/admin/phrase"><i class="feather icon-file-text"></i><span class="menu-title" >Phrase</span></a>

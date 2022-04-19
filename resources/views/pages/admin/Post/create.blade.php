@@ -9,7 +9,7 @@
    <ul class="nav nav-tabs position-absolute bg-transparent post-tabs" role="tablist">
     @foreach ($languages as $language)
      <li class="nav-item  ">
-      <a class="nav-link bg-transparent" id="{{ $language->code }}-tab" data-toggle="tab" href="#{{ $language->code }}" aria-controls="{{ $language->code }}" role="tab" aria-selected="true">{{ $language->name }}</a>
+      <a class=" {{ $language->code === auth()->user()->language_code ? 'active' : '' }} nav-link bg-transparent" id="{{ $language->code }}-tab" data-toggle="tab" href="#{{ $language->code }}" aria-controls="{{ $language->code }}" role="tab" aria-selected="true">{{ $language->name }}</a>
      </li>
     @endforeach
    </ul>
@@ -19,7 +19,7 @@
    </div>
    <div class="tab-content col-8 mr-1 mb-0 full-height-vh mt-5">
     @foreach ($languages as $key => $language)
-     <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'en' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
+     <div class="tab-pane full-height-vh bg-transparent {{ $language->code === auth()->user()->language_code ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
 
       <div class="card full-height-vh ">
        <div class="card-header">
@@ -32,19 +32,19 @@
            <div class="col-12">
             <input type="text" class="d-none" name="translations[{{ $key }}][language_code]" value="{{ $language->code }}">
             <div class="form-group">
-             <label for="title-vertical">Title</label>
-             <input type="text" id="title-vertical" {{ $language->id === 1 ? 'required' : '' }} class="form-control mt-1" name="translations[{{ $key }}][title]" placeholder="Title">
+             <label for="title-vertical">Title ({{ $language->name }})</label>
+             <input type="text" id="title-vertical" {{ $language->code === auth()->user()->language_code ? 'required' : '' }} class="form-control mt-1" name="translations[{{ $key }}][title]" placeholder="Title">
             </div>
            </div>
            <div class="col-12">
             <div class="form-group">
-             <label for="sub_title-vertical">Sub title</label>
-             <input type="text" id="sub_title-vertical" class="form-control mt-1" name="translations[{{ $key }}][sub_title]" placeholder="Sub title">
+             <label for="sub_title-vertical">Sub title ({{ $language->name }})</label>
+             <input {{ $language->code === auth()->user()->language_code ? 'required' : '' }} type="text" id="sub_title-vertical" class="form-control mt-1" name="translations[{{ $key }}][sub_title]" placeholder="Sub title">
             </div>
            </div>
            <div class="col-12">
             <div class="form-group">
-             <label for="summernote " class="mb-1">Description</label>
+             <label for="summernote " class="mb-1">Description ({{ $language->name }})</label>
              <textarea id="summernote" class="form-control summernote  mt-2" name="translations[{{ $key }}][description]"></textarea>
             </div>
            </div>

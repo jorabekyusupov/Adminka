@@ -23,16 +23,33 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = $this->service->getView()->where('language_code', 'uz')->paginate(10);
+        $row_item = [10, 20, 50, 100];
+        $language_code = request()->input('language_code') ?? auth()->user()->language_code;
+//        dd($language_code);
+        $rows = request()->input('rows') ?? 10;
+        $search = request()->input('search') ?? null;
+        $categories = $this->service->getView();
+        if (isset($language_code)){
+            if (isset($search)){
+                $categories = $categories->where('title', 'like', '%'.$search.'%');
+            }
+            $categories = $categories->where('language_code', $language_code);
+        }
+        if (isset($search)){
+            $categories = $categories->where('title', 'like', '%'.$search.'%');
+        }
+        $categories = $categories->paginate($rows);
+
+
         $languages = $this->languageService->get()->get();
-        return view('pages.admin.PostCategory.index', compact(['categories', 'languages']));
+        return view('pages.admin.PostCategory.index', compact(['categories', 'languages', 'row_item']));
     }
 
 
     public function create()
     {
         $languages = $this->languageService->get()->get();
-        $categories = $this->service->getView()->where('language_code', 'uz')->get();
+        $categories = $this->service->getView()->where('language_code', auth()->user()->language_code)->get();
         return view('pages.admin.PostCategory.create', compact(['languages', 'categories']));
     }
 
@@ -57,7 +74,7 @@ class CategoryController extends Controller
     {
         $category  = $this->service->show($id, ['translations']);
         $languages = $this->languageService->get()->get();
-        $categories = $this->service->getView()->where('language_code', 'uz')->get();
+        $categories = $this->service->getView()->where('language_code', auth()->user()->language_code)->get();
         return view('pages.admin.PostCategory.update', compact(['languages', 'categories', 'category']));
 
     }
@@ -69,13 +86,14 @@ class CategoryController extends Controller
         $file =$data['file'] ?? null;
         $this->service->edit($id,$data);
         $this->service->editTranslation($id, $data['translations']);
-        $files = $this->fileService->get()->where('object_id', $id)->where('object_type', 'category')->get();
-        if (count($files) > 0) {
+        $files = $this->fileService->get()->where('object_id', $id)->where('object_type', 'category')->first();
+//        dd($files);
+        if (isset($files)) {
             if ($file) {
-                    if (file_exists(storage_path('/app/public/files/categories/') . $file->full_size_path) && file_exists(storage_path('/app/public/files/categories/') . $file->thumbnail_path)) {
-                        unlink(storage_path('/app/public/files/categories/') . $file->full_size_path);
-                        unlink(storage_path('/app/public/files/categories/') . $file->thumbnail_path);
-                        $this->fileService->delete($file->id);
+                    if (file_exists(storage_path('/app/public/files/categories/') . $files->full_size_path) && file_exists(storage_path('/app/public/files/categories/') . $files->thumbnail_path)) {
+                        unlink(storage_path('/app/public/files/categories/') . $files->full_size_path);
+                        unlink(storage_path('/app/public/files/categories/') . $files->thumbnail_path);
+                        $this->fileService->delete($files->id);
                     }
 
                 $this->fileService->storeFile($data, '/app/public/files/categories/', $id, 'category');

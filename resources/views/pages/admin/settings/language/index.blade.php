@@ -25,15 +25,15 @@
                             @foreach($languages as $key=>$language)
 
                             <tr>
-                                <th scope="row">{{$key}}</th>
+                                <th scope="row">{{++$key}}</th>
                                 <td>{{$language->name}}</td>
                                 <td>{{$language->code}}</td>
                                 <td>
                                     <a class="badge bg-info" href="{{ route('language.edit', ['language' => $language->id]) }}">Edit</a>
-                                    <form action="{{ route('language.destroy', ['language' => $language->id]) }}" class="d-inline-block" method="post">
+                                    <form action="{{ route('language.destroy', ['language' => $language->id]) }}" class=" {{ $language->code === auth()->user()->language_code ? 'd-none' : 'd-inline-block ' }}" method="post">
                                         @method("delete")
                                         @csrf
-                                        <button type="submit" class="badge bg-danger border-0">
+                                            <button  type="submit" class="badge bg-danger border-0">
                                             Delete
                                         </button>
                                     </form>

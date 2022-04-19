@@ -39,9 +39,9 @@ class PostController extends Controller
         $rows = request()->input('rows') ?? 6;
         $category_id = request()->input('category_id') ?? null;
         $search = request()->input('search') ?? null;
-        $language_code = request()->input('language_code') ?? 'uz';
+        $language_code = request()->input('language_code') ?? auth()->user()->language_code;
         $posts = $this->service->getView();
-        if (isset($category_id)) {
+        if (isset($category_id) && $category_id != 0) {
             $posts = $posts->where('category_id', $category_id);
             if ($category_id && isset($language_code)) {
                 $posts = $posts->where('language_code', $language_code);
@@ -69,7 +69,7 @@ class PostController extends Controller
         $posts = $posts->paginate($rows);
 
         $languages = $this->languageService->get()->get();
-        $categories = $this->categoryService->getView()->where('language_code', 'uz')->get();
+        $categories = $this->categoryService->getView()->where('language_code', auth()->user()->language_code)->get();
         return view('pages.admin.Post.index', compact(['posts', 'categories', 'languages']));
     }
 
@@ -77,7 +77,7 @@ class PostController extends Controller
     public function create()
     {
         $languages = $this->languageService->get()->get();
-        $categories = $this->categoryService->getView()->where('language_code', 'uz')->get();
+        $categories = $this->categoryService->getView()->where('language_code', auth()->user()->language_code)->get();
         return view('pages.admin.Post.create', compact(['categories', 'languages']));
 
     }
@@ -110,7 +110,7 @@ class PostController extends Controller
 
         $posts = $this->service->show($id, ['translations', 'categories']);
         $languages = $this->languageService->get()->get();
-        $categories = $this->categoryService->getView()->where('language_code', 'uz')->get();
+        $categories = $this->categoryService->getView()->where('language_code', auth()->user()->language_code)->get();
         return view('pages.admin.Post.update', compact(['posts', 'categories', 'languages']));
     }
 

@@ -3,27 +3,36 @@
 
 @endsection
 @section('content-body')
+    @php
+        $language_code = request()->input('language_code');
+         $rows = request()->input('rows') ;
+        $search = request()->input('search') ?? null;
+    @endphp
     <div class="card-content">
         <div class="card-body d-flex align-items-center justify-content-between">
             <a href="{{ route('post-categories.create') }}" class="btn btn-outline-primary">Create</a>
-            <form action="" class="d-flex align-items-center col-8 justify-content-end" >
+            <form action="{{route('post-categories.index')}}" method="get" class="d-flex align-items-center col-8 justify-content-end" >
+                @method('GET')
                 <fieldset class="form-group position-relative col-auto m-0 p-0 mr-1" >
-                    <select name="rows" id="" class="form-control" style="background:#10163a;">
-                        <option value="">10</option>
+                    <select onchange="this.form.submit()" name="rows" id="" class="form-control" style="background:#10163a;">
+                            @foreach($row_item as $row)
+                            <option value="{{$row}}" {{$rows && $rows === intval($row) ? 'selected' : ''}}>{{$row}}</option>
+                            @endforeach
                     </select>
                 </fieldset>
                 <fieldset class="form-group position-relative col-2 m-0 p-0 mr-1" >
-                    <select name="language_code" id="" class="form-control" style="background:#10163a;">
+                    <select onchange="this.form.submit()" name="language_code" id="" class="form-control" style="background:#10163a;">
+                        <option selected disabled>Languages</option>
                         @if(isset($languages))
                             @foreach($languages as $language)
-                                <option value="{{$language->code}}">{{$language->name}}</option>
+                                <option value="{{$language->code}}" {{$language_code && $language_code===$language->code ? 'selected' : ''}}>{{$language->name}}</option>
                             @endforeach
 
                         @endif
                     </select>
                 </fieldset>
                 <fieldset class="form-group position-relative col-3 m-0 p-0 mr-1">
-                    <input style="background-color: #10163a;" type="text" class="form-control search-product" id="iconLeft5" name="search" placeholder="Search here">
+                    <input  onchange="this.form.submit()" style="background-color: #10163a;" type="text" value="{{$search ?? ''}}" class="form-control search-product" id="iconLeft5" name="search" placeholder="Search here">
                     <div class="form-control-position p-0">
                         <i class="feather icon-search"></i>
                     </div>

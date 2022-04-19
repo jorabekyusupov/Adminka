@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $lang = \request('lang') ?? 'ru';
+        $lang = \request('lang') ?? auth()->user()->language_code ;
         $languages = $this->languageService->get()->get();
         $phrase = $this->pageService->get()->with('phrase.translations', function ($query) use ($lang) {
             $query->where('language_code', $lang);
