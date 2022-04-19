@@ -5,5 +5,5 @@ SELECT c.id,
        ct.language_code,
        ct.id as category_translation_id
 FROM categories c
-          JOIN category_translations ct ON c.id = ct.object_id;
+          JOIN category_translations ct ON c.id = ct.object_id where ct.title is not null ;
 

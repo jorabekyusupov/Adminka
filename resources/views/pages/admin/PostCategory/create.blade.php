@@ -2,7 +2,7 @@
 @section('content-header')
 @endsection
 @section('content-body')
-    <form class="form form-vertical" method="post" action="{{route('post-categories.store')}}">
+    <form class="form form-vertical" method="post" action="{{route('post-categories.store')}}" enctype="multipart/form-data">
         @method('post')
         @csrf
         <div class="col-12 text-right">
@@ -20,7 +20,7 @@
                             @if (isset($languages))
                                 @foreach ($languages as $language)
                                     <li class="nav-item">
-                                        <a class="nav-link {{ $language->code === 'eng' ? 'active' : '' }} "
+                                        <a class="nav-link {{ $language->code === 'en' ? 'active' : '' }} "
                                            id="{{ $language->code }}" data-toggle="tab" href="#{{ $language->code }}-id"
                                            role="tab" aria-controls="{{ $language->code }}"
                                            aria-selected="true">{{ $language->name }}</a>
@@ -31,7 +31,7 @@
                         <div class="tab-content pt-1">
                             @if (isset($languages))
                                 @foreach ($languages as $key => $language)
-                                    <div class="tab-pane {{ $language->code === 'eng' ? 'active' : '' }}"
+                                    <div class="tab-pane {{ $language->code === 'en' ? 'active' : '' }}"
                                          id="{{ $language->code }}-id" role="tabpanel"
                                          aria-labelledby="{{ $language->code }}">
                                         <div class="col-12">

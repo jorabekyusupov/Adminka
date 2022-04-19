@@ -1,4 +1,4 @@
 insert into languages (name, code)
-values ('English', 'eng'),
+values ('English', 'en'),
        ('Русский', 'ru'),
        ('O`zbekcha', 'uz')

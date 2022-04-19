@@ -19,7 +19,7 @@
    </div>
    <div class="tab-content col-8 mr-1 mb-0 full-height-vh mt-5">
     @foreach ($languages as $key => $language)
-     <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'eng' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
+     <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'en' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
 
       <div class="card full-height-vh ">
        <div class="card-header">

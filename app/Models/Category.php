@@ -9,4 +9,9 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = [ 'parent_id'];
+
+    public function translations()
+    {
+        return $this->hasMany(CategoryTranslation::class, 'object_id', 'id');
+    }
 }

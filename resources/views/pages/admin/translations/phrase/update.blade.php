@@ -59,7 +59,7 @@
           @if (isset($languages))
            @foreach ($languages as $language)
             <li class="nav-item">
-             <a class="nav-link {{ $language->code === 'eng' ? 'active' : '' }} " id="{{ $language->code }}" data-toggle="tab" href="#{{ $language->code }}-id" role="tab" aria-controls="{{ $language->code }}" aria-selected="true">{{ $language->name }}</a>
+             <a class="nav-link {{ $language->code === 'en' ? 'active' : '' }} " id="{{ $language->code }}" data-toggle="tab" href="#{{ $language->code }}-id" role="tab" aria-controls="{{ $language->code }}" aria-selected="true">{{ $language->name }}</a>
             </li>
            @endforeach
           @endif
@@ -76,7 +76,7 @@
          <div class="tab-content pt-1">
           @if (isset($languages))
            @foreach ($languages as $key => $language)
-            <div class="tab-pane {{ $language->code === 'eng' ? 'active' : '' }}" id="{{ $language->code }}-id" role="tabpanel" aria-labelledby="{{ $language->code }}">
+            <div class="tab-pane {{ $language->code === 'en' ? 'active' : '' }}" id="{{ $language->code }}-id" role="tabpanel" aria-labelledby="{{ $language->code }}">
              <div class="col-12">
               @foreach ($translations as $key => $translation)
                @if ($translation->language_code === $language->code)

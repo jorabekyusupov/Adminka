@@ -15,7 +15,7 @@
    <ul class="nav nav-tabs position-absolute bg-transparent post-tabs" role="tablist">
     @foreach ($languages as $language)
      <li class="nav-item  ">
-      <a class="nav-link bg-transparent {{$language->code === 'eng' ? 'active' : ''}}" id="{{ $language->code }}-tab" data-toggle="tab" href="#{{ $language->code }}" aria-controls="{{ $language->code }}" role="tab" aria-selected="true">{{ $language->name }}</a>
+      <a class="nav-link bg-transparent {{$language->code === 'en' ? 'active' : ''}}" id="{{ $language->code }}-tab" data-toggle="tab" href="#{{ $language->code }}" aria-controls="{{ $language->code }}" role="tab" aria-selected="true">{{ $language->name }}</a>
      </li>
     @endforeach
    </ul>
@@ -27,7 +27,7 @@
     @foreach ($languages as $key => $language)
      @foreach ($translations as $translation)
       @if ($translation->language_code === $language->code)
-       <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'eng' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
+       <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'en' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
         <div class="card full-height-vh ">
          <div class="card-header">
           <h4 class="card-title">Vertical Form</h4>
@@ -66,7 +66,7 @@
         @if(isset($notTranslations))
          @foreach ($notTranslations as $key => $notTranslation)
              @if($notTranslation->code === $language->code)
-                     <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'eng' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
+                     <div class="tab-pane full-height-vh bg-transparent {{ $language->code === 'en' ? 'active' : '' }}" id="{{ $language->code }}" aria-labelledby="{{ $language->code }}-tab" role="tabpanel">
                          <div class="card full-height-vh ">
                              <div class="card-header">
                                  <h4 class="card-title">Vertical Form</h4>
