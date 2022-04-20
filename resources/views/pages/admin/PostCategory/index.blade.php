@@ -61,7 +61,7 @@
                             <td>{{$category->parent_id ?? 'Main'}}</td>
                             <td>
                                 <a class="badge bg-info" href="{{ route('post-categories.edit', ['post_category' => $category->id]) }}"><i class="feather icon-edit"></i></a>
-                                <form action="{{ route('post-categories.destroy', ['id' => $category->id]) }}" class="d-inline-block" method="post">
+                                <form action="{{ route('post-categories.destroy', ['post_category' => $category->id]) }}" class="d-inline-block" method="post">
                                     @method("delete")
                                     @csrf
                                     <button type="submit" class="badge bg-danger border-0">
