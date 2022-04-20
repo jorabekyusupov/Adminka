@@ -109,15 +109,11 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        $this->service->repository->modelTranslation->where('object_id', $id)->pluck('id')->each(function ($id) {
-            $this->service->repository->modelTranslation->delete($id);
+        $this->service->getTranslation()->where('object_id', $id)->each(function ($item) {
+            $this->service->destroyTranslation($item->id);
         });
         return redirect()->route('post-categories.index');
     }
 
-    public function destroyTranslations($id)
-    {
-        $this->service->destroyTranslation($id);
-        return redirect()->route('post-categories.index');
-    }
+
 }

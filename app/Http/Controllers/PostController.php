@@ -149,7 +149,7 @@ class PostController extends Controller
     {
 
         $this->service->getTranslation()->where('object_id', $id)->each(function ($item) {
-            $this->service->delete($item->id);
+            $this->service->destroyTranslation($item->id);
         });
         $this->postCategoryService->get()->where('post_id', $id)->each(function ($item) {
             $this->postCategoryService->delete($item->id);
