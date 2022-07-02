@@ -48,7 +48,7 @@ class PostController extends Controller
             });
             if ($category_id && isset($language_code)) {
                 $posts = $posts->where('language_code', $language_code);
-                if ( isset($search)) {
+                if (isset($search)) {
                     $posts = $posts->where('title', 'like', '%' . $search . '%')
                         ->orWhere('sub_title', 'like', '%' . $search . '%');
                 }
@@ -60,7 +60,7 @@ class PostController extends Controller
         }
         if (isset($language_code)) {
             $posts = $posts->where('language_code', $language_code);
-            if ( isset($search)) {
+            if (isset($search)) {
                 $posts = $posts->where('title', 'like', '%' . $search . '%')
                     ->orWhere('sub_title', 'like', '%' . $search . '%');
             }
@@ -124,8 +124,8 @@ class PostController extends Controller
         $this->service->edit($id, $data);
         $this->service->editTranslation($id, $data['translations']);
         $files = $this->fileService->get()->where('object_id', $id)->where('object_type', 'posts')->get();
-        if ($files) {
-            if ($data['files']) {
+        if ($data['files']) {
+            if ($files) {
                 foreach ($files as $item) {
                     if (file_exists(storage_path('/app/public/files/posts/') . $item->full_size_path) && file_exists(storage_path('/app/public/files/posts/') . $item->thumbnail_path)) {
                         unlink(storage_path('/app/public/files/posts/') . $item->full_size_path);

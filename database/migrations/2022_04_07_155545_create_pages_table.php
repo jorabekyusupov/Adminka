@@ -12,7 +12,6 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('page_link')->nullable();
-            $table->string('page_icon')->nullable();
             $table->timestamps();
         });
     }
